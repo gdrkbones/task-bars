@@ -2584,10 +2584,10 @@ yn@3.1.1:
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
   integrity sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
 
-yup@^1.0.0:
-  version "1.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/yup/-/yup-1.0.0-beta.3.tgz#ff9a086a7b4b3f839347d9c33f7ff2101c8bb846"
-  integrity sha512-rM0UOCv1W1vy5lOhIdUJSX0vqRrSlqBEzni5Dp2+apNEBq5rbTC4M/sc/LlAkm5oGWqf1pGkCq6IUFhuCJt7Gg==
+yup@1.0.0-beta.4:
+  version "1.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/yup/-/yup-1.0.0-beta.4.tgz#df10f42df6aa0212c22aab58d6d026b1610ff8a3"
+  integrity sha512-g5uuQH2rN+0Z4L/ix8KoYIS6v7vnrykRzM/u7ExSA0WA33vrw2YOUKShBhaueh9N95oz54slgqBQTHx7E6EHwg==
   dependencies:
     property-expr "^2.0.4"
     tiny-case "^1.0.2"
