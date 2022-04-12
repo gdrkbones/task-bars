@@ -27,3 +27,5 @@ $ yarn prisma db seed
 This command will populate the database with moch Data.
 
 # Check Online
+
+https://task-bars.vercel.app/
