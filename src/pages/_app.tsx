@@ -9,6 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>Gateway Manager</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {/* @ts-ignore: Unreachable code error */}
       <Component {...pageProps} />
     </div>
   )

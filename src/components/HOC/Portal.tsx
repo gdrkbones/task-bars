@@ -1,7 +1,7 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
-const Portal = ({ children }: { children: ReactNode }) => {
+const Portal = ({ children }: { children: any }) => {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
