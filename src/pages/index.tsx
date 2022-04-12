@@ -39,11 +39,13 @@ const Home: NextPage = () => {
   >()
 
   useEffect(() => {
-    if (!!category) {
+    if (!!category && !categories.error) {
       fetch(`http://localhost:3000/api/v1/categories/${category?.value}`)
         .then((res) => res.json())
         .then((res) => {
-          setCategoryData(res)
+          if (!res.error) {
+            setCategoryData(res)
+          }
         })
         .catch((error) => {
           setCategoryData(null)
@@ -100,7 +102,7 @@ const Home: NextPage = () => {
     setBrand(val)
   }
 
-  if (error)
+  if (error || categories?.error)
     return (
       <div className="w-full justify-center items-center flex h-full">
         <p className="w-1/2 text-5xl">An error ocurred while fetching data.</p>
