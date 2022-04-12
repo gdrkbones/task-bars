@@ -17,10 +17,7 @@ type SelectOption = {
 
 const Home: NextPage = () => {
   // const [activeAdd, setActiveAdd] = useState(false)
-  const { data: categories, error } = useSWR(
-    `http://localhost:3000/api/v1/categories`,
-    fetcher
-  )
+  const { data: categories, error } = useSWR(`/api/v1/categories`, fetcher)
 
   const [category, setCategory] = useState<SelectOption | null>(null)
 
@@ -40,7 +37,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (!!category && !categories.error) {
-      fetch(`http://localhost:3000/api/v1/categories/${category?.value}`)
+      fetch(`/api/v1/categories/${category?.value}`)
         .then((res) => res.json())
         .then((res) => {
           if (!res.error) {
@@ -59,7 +56,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (!!brand) {
-      fetch(`http://localhost:3000/api/v1/sales?brand=${brand?.value}`)
+      fetch(`/api/v1/sales?brand=${brand?.value}`)
         .then((res) => res.json())
         .then(({ data }) => {
           const tempSales: { [x: string]: number } = {}
