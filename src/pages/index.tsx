@@ -22,7 +22,7 @@ const Home: NextPage = () => {
   const [category, setCategory] = useState<SelectOption | null>(null)
 
   const [categoryData, setCategoryData] = useState<null | any>()
-  // const [categoryDataError, setCategoryDataError] = useState<null | any>(null)
+  const [categoryDataError, setCategoryDataError] = useState<null | any>(null)
 
   const [product, setProduct] = useState<SelectOption | null>(null)
 
@@ -36,17 +36,18 @@ const Home: NextPage = () => {
   >()
 
   useEffect(() => {
-    if (!!category && !categories.error) {
+    if (!!category) {
       fetch(`/api/v1/categories/${category?.value}`)
-        .then((res) => res.json())
         .then((res) => {
-          if (!res.error) {
-            setCategoryData(res)
-          }
+          return res.json()
+        })
+        .then((res) => {
+          if (res.error) throw Error(res)
+          setCategoryData(res)
         })
         .catch((error) => {
           setCategoryData(null)
-          // setCategoryDataError(error)
+          setCategoryDataError(error)
         })
     }
     return () => {
@@ -57,13 +58,16 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (!!brand) {
       fetch(`/api/v1/sales?brand=${brand?.value}`)
-        .then((res) => res.json())
-        .then(({ data }) => {
+        .then((res) => {
+          return res.json()
+        })
+        .then((res) => {
+          if (res.error) throw Error(res)
           const tempSales: { [x: string]: number } = {}
           const months: string[] = []
-          for (const key in data) {
-            if (Object.prototype.hasOwnProperty.call(data, key)) {
-              const sale = data[key]
+          for (const key in res.data) {
+            if (Object.prototype.hasOwnProperty.call(res.data, key)) {
+              const sale = res.data[key]
 
               const month = dayjs(sale.date).format('MMMM')
               if (months.length === 0 || months[length - 1] !== month)
@@ -99,7 +103,7 @@ const Home: NextPage = () => {
     setBrand(val)
   }
 
-  if (error || categories?.error)
+  if (error)
     return (
       <div className="w-full justify-center items-center flex h-full">
         <p className="w-1/2 text-5xl">An error ocurred while fetching data.</p>
@@ -143,7 +147,7 @@ const Home: NextPage = () => {
           value={product}
           isDisabled={!categoryData}
           options={
-            !categoryData || !categoryData.products
+            !categoryData
               ? []
               : categoryData.products.map((prod: any) => ({
                   value: prod.id,
@@ -156,7 +160,7 @@ const Home: NextPage = () => {
           value={brand}
           isDisabled={!categoryData || !product}
           options={
-            !categoryData || !categoryData.products || !product
+            !categoryData || !product
               ? []
               : categoryData.products
                   .find((prod: { id: any }) => prod.id === product.value)
